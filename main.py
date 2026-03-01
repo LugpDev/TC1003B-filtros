@@ -8,6 +8,7 @@ from PIL import Image
 from filtros.grises import aplicar_escala_grises
 from filtros.binario import aplicar_binario
 from filtros.inverso import aplicar_inverso
+from filtros.suavizado_3x3 import suavizado_3x3
 
 
 def copiar_imagen(event, editor):
@@ -18,35 +19,6 @@ def copiar_imagen(event, editor):
     pixeles = imagen.load()
     imagen_procesada = Image.new("RGB", (ancho, alto), color="white")
     editor.mostrar_imagen1(imagen)
-    editor.mostrar_imagen2(imagen_procesada)
-
-
-def aplicar_filtro3x3(event):
-    mask = [[-1, 1, 1], [-1, -2, 1], [-1, 1, 1]]
-    aplicar_mascara(mask)
-
-
-def aplicar_mascara(mask):
-    global imagen_procesada
-    pixeles_salida = imagen_procesada.load()
-
-    for x in range(ancho):
-        for y in range(alto):
-            n = r = g = b = 0
-            radio = len(mask) // 2
-            for dx in range(-radio, radio + 1):
-                for dy in range(-radio, radio + 1):
-                    if 0 <= x + dx < ancho and 0 <= y + dy < alto:
-                        pixel = pixeles[x + dx, y + dy]
-                        peso = mask[dx + radio][dy + radio]
-                        r += pixel[0] * peso
-                        g += pixel[1] * peso
-                        b += pixel[2] * peso
-                        n += peso
-            if n == 0:
-                n = 1
-            r, g, b = r // n, g // n, b // n
-            pixeles_salida[x, y] = (r, g, b)
     editor.mostrar_imagen2(imagen_procesada)
 
 
@@ -119,6 +91,12 @@ btn_inversio = Button(
     ax_btn_inversio, "Inverso", color="lightblue", hovercolor="skyblue"
 )
 btn_inversio.on_clicked(lambda event: aplicar_inverso(event, editor))
+
+btn_suavizado3x3 = plt.axes([0.34, 0.96, 0.1, 0.04])
+btn_suavizado3x3 = Button(
+    btn_suavizado3x3, "Suavizado 3x3", color="lightblue", hovercolor="skyblue"
+)
+btn_suavizado3x3.on_clicked(lambda event: suavizado_3x3(event, editor))
 
 ax_btn_save = plt.axes([0.92, 0.96, 0.08, 0.04])
 btn_save = Button(ax_btn_save, "Guardar", color="white", hovercolor="yellow")
