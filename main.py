@@ -1,25 +1,12 @@
-from PIL import Image
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Button
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from tkinter import Tk
 from lib.Editor import Editor
-
-archivo = "test.avif"
-Tk().withdraw()
-archivo = askopenfilename(filetypes=[("Imágenes", "*.jpg *.png *.avif")])
-if not archivo:
-    exit()
-
-imagen = Image.open(archivo)
-ancho, alto = imagen.size
-print("Imagen de ", ancho, "x", alto)
-pixeles = imagen.load()
-
-imagen_procesada = Image.new("RGB", (ancho, alto), color="white")
+from PIL import Image
 
 
-def copiar_imagen(event):
+def copiar_imagen(event, editor):
     global imagen
     global imagen_procesada
     global pixeles
@@ -107,9 +94,15 @@ def guardar_imagen(event):
         print("Guardado cancelado")
 
 
-editor = Editor()
-editor.mostrar_imagen1(imagen)
-editor.mostrar_imagen2(imagen_procesada)
+Tk().withdraw()
+archivo = askopenfilename(filetypes=[("Imágenes", "*.jpg *.png *.avif")])
+if not archivo:
+    exit()
+
+
+editor = Editor(archivo)
+editor.mostrar_imagen1(editor.imagen)
+editor.mostrar_imagen2(editor.imagen_procesada)
 
 
 plt.subplots_adjust(wspace=0.2)
