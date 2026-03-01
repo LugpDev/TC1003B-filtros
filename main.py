@@ -8,7 +8,7 @@ from PIL import Image
 from filtros.grises import aplicar_escala_grises
 from filtros.binario import aplicar_binario
 from filtros.inverso import aplicar_inverso
-from filtros.suavizado_3x3 import suavizado_3x3
+from filtros.suavizado import suavizado_3x3, suavizado_5x5, suavizado_7x7
 
 
 def copiar_imagen(event, editor):
@@ -97,6 +97,18 @@ btn_suavizado3x3 = Button(
     btn_suavizado3x3, "Suavizado 3x3", color="lightblue", hovercolor="skyblue"
 )
 btn_suavizado3x3.on_clicked(lambda event: suavizado_3x3(event, editor))
+
+btn_suavizado5x5 = plt.axes([0.44, 0.96, 0.1, 0.04])
+btn_suavizado5x5 = Button(
+    btn_suavizado5x5, "Suavizado 5x5", color="lightblue", hovercolor="skyblue"
+)
+btn_suavizado5x5.on_clicked(lambda event: suavizado_5x5(event, editor))
+
+btn_suavizado7x7 = plt.axes([0.54, 0.96, 0.1, 0.04])
+btn_suavizado7x7 = Button(
+    btn_suavizado7x7, "Suavizado 7x7", color="lightblue", hovercolor="skyblue"
+)
+btn_suavizado7x7.on_clicked(lambda event: suavizado_7x7(event, editor))
 
 ax_btn_save = plt.axes([0.92, 0.96, 0.08, 0.04])
 btn_save = Button(ax_btn_save, "Guardar", color="white", hovercolor="yellow")
