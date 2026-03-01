@@ -9,6 +9,7 @@ from filtros.grises import aplicar_escala_grises
 from filtros.binario import aplicar_binario
 from filtros.inverso import aplicar_inverso
 from filtros.suavizado import suavizado_3x3, suavizado_5x5, suavizado_7x7
+from filtros.bordes import aplicar_bordes_horizontal, aplicar_bordes_vertical
 
 
 def copiar_imagen(event, editor):
@@ -109,6 +110,18 @@ btn_suavizado7x7 = Button(
     btn_suavizado7x7, "Suavizado 7x7", color="lightblue", hovercolor="skyblue"
 )
 btn_suavizado7x7.on_clicked(lambda event: suavizado_7x7(event, editor))
+
+btn_bordes_horizontal = plt.axes([0.64, 0.96, 0.1, 0.04])
+btn_bordes_horizontal = Button(
+    btn_bordes_horizontal, "Bordes horiz.", color="lightblue", hovercolor="skyblue"
+)
+btn_bordes_horizontal.on_clicked(lambda event: aplicar_bordes_horizontal(event, editor))
+
+btn_bordes_vertical = plt.axes([0.74, 0.96, 0.1, 0.04])
+btn_bordes_vertical = Button(
+    btn_bordes_vertical, "Bordes vert.", color="lightblue", hovercolor="skyblue"
+)
+btn_bordes_vertical.on_clicked(lambda event: aplicar_bordes_vertical(event, editor))
 
 ax_btn_save = plt.axes([0.92, 0.96, 0.08, 0.04])
 btn_save = Button(ax_btn_save, "Guardar", color="white", hovercolor="yellow")
