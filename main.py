@@ -5,6 +5,8 @@ from tkinter import Tk
 from lib.Editor import Editor
 from PIL import Image
 
+from filtros.grises import aplicar_escala_grises
+
 
 def copiar_imagen(event, editor):
     global imagen
@@ -14,21 +16,6 @@ def copiar_imagen(event, editor):
     pixeles = imagen.load()
     imagen_procesada = Image.new("RGB", (ancho, alto), color="white")
     editor.mostrar_imagen1(imagen)
-    editor.mostrar_imagen2(imagen_procesada)
-
-
-def aplicar_escala_grises(event):
-    global imagen_procesada
-    pixeles_salida = imagen_procesada.load()
-
-    for x in range(ancho):
-        for y in range(alto):
-            pixel = pixeles[x, y]
-            r = pixel[0]
-            g = pixel[1]
-            b = pixel[2]
-            g = (r + g + b) // 3
-            pixeles_salida[x, y] = (g, g, g)
     editor.mostrar_imagen2(imagen_procesada)
 
 
@@ -109,7 +96,7 @@ plt.subplots_adjust(wspace=0.2)
 
 ax_btn_grises = plt.axes([0.0, 0.96, 0.08, 0.04])
 btn_grises = Button(ax_btn_grises, "Grises", color="lightblue", hovercolor="skyblue")
-btn_grises.on_clicked(aplicar_escala_grises)
+btn_grises.on_clicked(lambda event: aplicar_escala_grises(event, editor))
 
 ax_btn_suavizado = plt.axes([0.08, 0.96, 0.08, 0.04])
 btn_suavizado = Button(
