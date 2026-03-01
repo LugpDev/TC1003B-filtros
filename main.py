@@ -99,17 +99,19 @@ ax_btn_grises = plt.axes([0.0, 0.96, 0.08, 0.04])
 btn_grises = Button(ax_btn_grises, "Grises", color="lightblue", hovercolor="skyblue")
 btn_grises.on_clicked(lambda event: aplicar_escala_grises(event, editor))
 
-ax_btn_suavizado = plt.axes([0.08, 0.96, 0.08, 0.04])
-btn_suavizado = Button(
-    ax_btn_suavizado, "Binario fijo", color="lightblue", hovercolor="skyblue"
+ax_btn_binario_fijo = plt.axes([0.08, 0.96, 0.08, 0.04])
+btn_binario_fijo = Button(
+    ax_btn_binario_fijo, "Binario fijo", color="lightblue", hovercolor="skyblue"
 )
-btn_suavizado.on_clicked(lambda event: aplicar_binario(event, editor))
+btn_binario_fijo.on_clicked(lambda event: aplicar_binario(event, editor))
 
-ax_btn_filtro = plt.axes([0.16, 0.96, 0.1, 0.04])
-btn_filtro = Button(
-    ax_btn_filtro, "Binario dinámico", color="lightblue", hovercolor="skyblue"
+ax_btn_binario_dinamico = plt.axes([0.16, 0.96, 0.1, 0.04])
+btn_binario_dinamico = Button(
+    ax_btn_binario_dinamico, "Binario dinámico", color="lightblue", hovercolor="skyblue"
 )
-btn_filtro.on_clicked(lambda event: aplicar_binario(event, editor, binarizado=True))
+btn_binario_dinamico.on_clicked(
+    lambda event: aplicar_binario(event, editor, binarizado=True)
+)
 
 ax_btn_save = plt.axes([0.92, 0.96, 0.08, 0.04])
 btn_save = Button(ax_btn_save, "Guardar", color="white", hovercolor="yellow")
