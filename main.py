@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Button
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from tkinter import Tk
+from lib.Editor import Editor
 
 archivo = "test.avif"
 Tk().withdraw()
@@ -115,13 +116,9 @@ def guardar_imagen(event):
         print("Guardado cancelado")
 
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
-
-ax1.imshow(imagen)
-ax1.set_title("Imagen original")
-
-ax2.imshow(imagen_procesada)
-ax2.set_title("Imagen en niveles de gris")
+editor = Editor()
+editor.mostrar_imagen1(imagen)
+editor.mostrar_imagen2(imagen_procesada)
 
 
 plt.subplots_adjust(wspace=0.2)
