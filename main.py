@@ -3,7 +3,6 @@ from matplotlib.widgets import Button
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from tkinter import Tk
 from lib.Editor import Editor
-from PIL import Image
 
 from filtros.grises import aplicar_escala_grises
 from filtros.binario import aplicar_binario
@@ -11,19 +10,6 @@ from filtros.inverso import aplicar_inverso
 from filtros.suavizado import suavizado_3x3, suavizado_5x5, suavizado_7x7
 from filtros.bordes import aplicar_bordes_horizontal, aplicar_bordes_vertical
 from lib.copiar_imagen import copiar_imagen
-
-
-def guardar_imagen(event):
-    Tk().withdraw()
-    nombre_archivo = asksaveasfilename(
-        title="Guardar imagen procesada",
-        defaultextension=".png",
-        filetypes=[("PNG", "*.png"), ("JPEG", "*.jpg"), ("BMP", "*.bmp")],
-    )
-    if nombre_archivo:
-        imagen_procesada.save(nombre_archivo)
-    else:
-        print("Guardado cancelado")
 
 
 Tk().withdraw()
@@ -95,7 +81,7 @@ btn_bordes_vertical.on_clicked(lambda event: aplicar_bordes_vertical(event, edit
 
 ax_btn_save = plt.axes([0.92, 0.96, 0.08, 0.04])
 btn_save = Button(ax_btn_save, "Guardar", color="white", hovercolor="yellow")
-btn_save.on_clicked(guardar_imagen)
+btn_save.on_clicked(lambda event: guardar_imagen(event, editor))
 
 ax_btn_copy = plt.axes([0.48, 0.48, 0.04, 0.04])
 btn_copy = Button(ax_btn_copy, "<-", color="white", hovercolor="yellow")
