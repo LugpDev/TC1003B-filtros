@@ -10,37 +10,7 @@ from filtros.binario import aplicar_binario
 from filtros.inverso import aplicar_inverso
 from filtros.suavizado import suavizado_3x3, suavizado_5x5, suavizado_7x7
 from filtros.bordes import aplicar_bordes_horizontal, aplicar_bordes_vertical
-
-
-def copiar_imagen(event, editor):
-    global imagen
-    global imagen_procesada
-    global pixeles
-    imagen = imagen_procesada.copy()
-    pixeles = imagen.load()
-    imagen_procesada = Image.new("RGB", (ancho, alto), color="white")
-    editor.mostrar_imagen1(imagen)
-    editor.mostrar_imagen2(imagen_procesada)
-
-
-def aplicar_suavizado(event):
-    global imagen_procesada
-    pixeles_salida = imagen_procesada.load()
-
-    for x in range(ancho):
-        for y in range(alto):
-            n = r = g = b = 0
-            for dx in range(-1, 2):
-                for dy in range(-1, 2):
-                    if 0 <= x + dx < ancho and 0 <= y + dy < alto:
-                        pixel = pixeles[x + dx, y + dy]
-                        r += pixel[0]
-                        g += pixel[1]
-                        b += pixel[2]
-                        n += 1
-            r, g, b = r // n, g // n, b // n
-            pixeles_salida[x, y] = (r, g, b)
-    editor.mostrar_imagen2(imagen_procesada)
+from lib.copiar_imagen import copiar_imagen
 
 
 def guardar_imagen(event):
@@ -129,6 +99,6 @@ btn_save.on_clicked(guardar_imagen)
 
 ax_btn_copy = plt.axes([0.48, 0.48, 0.04, 0.04])
 btn_copy = Button(ax_btn_copy, "<-", color="white", hovercolor="yellow")
-btn_copy.on_clicked(copiar_imagen)
+btn_copy.on_clicked(lambda event: copiar_imagen(event, editor))
 
 plt.show()
