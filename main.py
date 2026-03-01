@@ -6,6 +6,7 @@ from lib.Editor import Editor
 from PIL import Image
 
 from filtros.grises import aplicar_escala_grises
+from filtros.binario import aplicar_binario
 
 
 def copiar_imagen(event, editor):
@@ -100,9 +101,9 @@ btn_grises.on_clicked(lambda event: aplicar_escala_grises(event, editor))
 
 ax_btn_suavizado = plt.axes([0.08, 0.96, 0.08, 0.04])
 btn_suavizado = Button(
-    ax_btn_suavizado, "Suavizado", color="lightblue", hovercolor="skyblue"
+    ax_btn_suavizado, "Binario fijo", color="lightblue", hovercolor="skyblue"
 )
-btn_suavizado.on_clicked(aplicar_suavizado)
+btn_suavizado.on_clicked(lambda event: aplicar_binario(event, editor, binarizado=False))
 
 ax_btn_filtro = plt.axes([0.16, 0.96, 0.08, 0.04])
 btn_filtro = Button(ax_btn_filtro, "Filtro3x3", color="lightblue", hovercolor="skyblue")
