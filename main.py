@@ -10,6 +10,7 @@ from filtros.inverso import aplicar_inverso
 from filtros.suavizado import suavizado_3x3, suavizado_5x5, suavizado_7x7
 from filtros.bordes import aplicar_bordes_horizontal, aplicar_bordes_vertical
 from lib.copiar_imagen import copiar_imagen
+from lib.guardar_imagen import guardar_imagen
 
 
 Tk().withdraw()
